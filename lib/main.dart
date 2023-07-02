@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'pages/homePage.dart';
 
 void main() {
@@ -8,19 +8,15 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: Color(0xff202124)),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff202124)),
-      //   useMaterial3: true,
-      // ),
-      home: const HomePage(),
+      title: 'Keep App',
+      home: HomePage(),
     );
   }
 }
