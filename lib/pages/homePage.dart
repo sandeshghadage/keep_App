@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:keep_clone_app/pages/createKeep.dart';
 import 'package:keep_clone_app/pages/keepItem.dart';
+import 'package:keep_clone_app/widgets/burgerMenu.dart';
+import 'package:keep_clone_app/widgets/searchBox.dart';
 import '../constants/colors.dart';
 import '../model/keepModel.dart';
 
@@ -12,6 +14,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void openDrawer() {
+    Scaffold.of(context).openDrawer();
+  }
+
   final list = keepModel.keepList();
 
   final List<String> dataArray = [
@@ -22,10 +28,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // drawer: BurgerMenu(),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: primaryColor,
-        title: SearchBox(),
+        // title: Builder(
+        //   builder: (context) => SearchBox(
+        //     onOpenDrawer: () => openDrawer(),
+        //   ),
+        // ),
+        title: SearchBox(onOpenDrawer: openDrawer),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -36,8 +48,9 @@ class _HomePageState extends State<HomePage> {
           children: [
             for (keepModel keep in list)
               KeepItem(
-                keepText: keep.text.toString(),
                 id: keep.id.toString(),
+                keepTitle: keep.title.toString(),
+                keepText: keep.text.toString(),
                 onDeleteItem: _deleteKeepItem,
               )
           ],
@@ -70,41 +83,44 @@ class _HomePageState extends State<HomePage> {
   // }
 }
 
-Widget SearchBox() {
-  return Container(
-    child: TextField(
-      decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 0, horizontal: 26.0),
-          prefixIcon: const Icon(
-            Icons.menu,
-            color: textColor,
-          ),
-          hintText: 'Search your notes',
-          hintStyle: const TextStyle(fontSize: 16, color: textColor),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(22),
-            borderSide: const BorderSide(
-              width: 0,
-              style: BorderStyle.none,
-            ),
-          ),
-          filled: true,
-          fillColor: Color(0xff525355),
-          suffix: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                child: const Text(
-                  "dfdfs",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              Container(
-                child: Text("df"),
-              )
-            ],
-          )),
-    ),
-  );
-}
+// Widget SearchBox() {
+//   return Container(
+//     child: TextField(
+//       decoration: InputDecoration(
+//           contentPadding:
+//               const EdgeInsets.symmetric(vertical: 0, horizontal: 26.0),
+//           prefixIcon: GestureDetector(
+//             onTap: (){},
+//             child: const Icon(
+//               Icons.menu,
+//               color: textColor,
+//             ),
+//           ),
+//           hintText: 'Search your notes',
+//           hintStyle: const TextStyle(fontSize: 16, color: textColor),
+//           border: OutlineInputBorder(
+//             borderRadius: BorderRadius.circular(22),
+//             borderSide: const BorderSide(
+//               width: 0,
+//               style: BorderStyle.none,
+//             ),
+//           ),
+//           filled: true,
+//           fillColor: Color(0xff525355),
+//           suffix: Row(
+//             mainAxisSize: MainAxisSize.min,
+//             children: [
+//               Container(
+//                 child: const Text(
+//                   "dfdfs",
+//                   style: TextStyle(color: Colors.white),
+//                 ),
+//               ),
+//               Container(
+//                 child: Text("df"),
+//               )
+//             ],
+//           )),
+//     ),
+//   );
+// }

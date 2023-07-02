@@ -3,7 +3,6 @@ import 'package:keep_clone_app/constants/colors.dart';
 import 'package:keep_clone_app/model/keepModel.dart';
 
 class CreateKeep extends StatefulWidget {
-  // final addKeepItem;
   const CreateKeep({super.key});
 
   @override
@@ -69,7 +68,7 @@ class _CreateKeepState extends State<CreateKeep> {
           ),
           ElevatedButton(
             onPressed: () {
-              // _addKeepItem(text: _textController);
+              _addKeepItem(_titleController.text, _textController.text);
             },
             child: Text('Save Keep'),
           )
@@ -78,10 +77,21 @@ class _CreateKeepState extends State<CreateKeep> {
     );
   }
 
-  // void _addKeepItem(String text) {
-  //   setState(() {
-  //     list.add(keepModel(
-  //         id: DateTime.now().millisecondsSinceEpoch.toString(), text: text));
-  //   });
-  // }
+  void _addKeepItem(String title, String text) {
+    setState(() {
+      list.add(keepModel(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          title: title,
+          text: text));
+    });
+    _textController.clear();
+    _titleController.clear();
+    // list.forEach((item) {
+    //   print(item.text);
+    // });
+  }
+
+  void _updateKeepItem(String text) {
+    setState(() {});
+  }
 }

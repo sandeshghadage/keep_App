@@ -6,12 +6,14 @@ import '../constants/colors.dart';
 
 class KeepItem extends StatelessWidget {
   final String id;
+  final String keepTitle;
   final String keepText;
   final onDeleteItem;
 
   const KeepItem(
       {super.key,
       required this.id,
+      required this.keepTitle,
       required this.keepText,
       required this.onDeleteItem});
 
@@ -38,7 +40,7 @@ class KeepItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              keepText,
+              keepTitle,
               style: TextStyle(
                 color: textColor,
                 fontSize: 20,
@@ -50,7 +52,7 @@ class KeepItem extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                'This is dummy note text, It will change later.',
+                keepText,
                 style: TextStyle(
                   color: textColor,
                   fontSize: 18,
