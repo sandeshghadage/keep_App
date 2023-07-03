@@ -2,26 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:keep_clone_app/constants/colors.dart';
 import 'package:keep_clone_app/model/keepModel.dart';
 
-class CreateKeep extends StatefulWidget {
-  const CreateKeep({super.key});
+class UpdateKeep extends StatefulWidget {
+  final String id;
+  final String title;
+  final String text;
+  const UpdateKeep(
+      {required this.id, required this.title, required this.text, super.key});
 
   @override
-  State<CreateKeep> createState() => _CreateKeepState();
+  State<UpdateKeep> createState() => _UpdateKeepState(title: title);
 }
 
-class _CreateKeepState extends State<CreateKeep> {
-  final _titleController = TextEditingController();
-  final _textController = TextEditingController();
+class _UpdateKeepState extends State<UpdateKeep> {
+  final String title;
+  _UpdateKeepState({required this.title});
+  @override
+  void initState() {
+    super.initState();
+    print(title);
+  }
+
+  final TextEditingController _titleController =
+      TextEditingController(text: "title");
+  final TextEditingController _textController =
+      TextEditingController(text: 'Default Text');
   final list = keepModel.keepList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          AppBar(elevation: 0, backgroundColor: primaryColor, actions: const [
-        Icon(Icons.pin_drop_outlined),
-        Icon(Icons.notification_add),
-        Icon(Icons.archive_outlined)
-      ]),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: primaryColor,
+        actions: const [
+          Icon(Icons.pin_drop_outlined),
+          Icon(Icons.notification_add),
+          Icon(Icons.archive_outlined)
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
@@ -70,7 +87,8 @@ class _CreateKeepState extends State<CreateKeep> {
             ),
             ElevatedButton(
               onPressed: () {
-                _addKeepItem(_titleController.text, _textController.text);
+                _updateKeepItem(
+                    widget.id, _titleController.text, _textController.text);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xff525355),
@@ -79,7 +97,7 @@ class _CreateKeepState extends State<CreateKeep> {
                 textStyle:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               ),
-              child: const Text('Create Keep'),
+              child: const Text('Save Keep'),
             )
           ],
         ),
@@ -87,27 +105,17 @@ class _CreateKeepState extends State<CreateKeep> {
     );
   }
 
-  void _addKeepItem(String title, String text) {
+  void _updateKeepItem(String id, String title, String text) {
     setState(
       () {
-        list.add(
-          keepModel(
-              id: DateTime.now().millisecondsSinceEpoch.toString(),
-              title: title,
-              text: text),
-        );
+        int targetIndex = list.indexWhere((fruit) => fruit.id == id);
+        if (targetIndex != -1) {
+          list[targetIndex] = keepModel(id: id, title: title, text: text);
+        }
       },
     );
-    _textController.clear();
-    _titleController.clear();
-    list.forEach(
-      (item) {
-        print(item.text);
-      },
-    );
-  }
-
-  void _updateKeepItem(String text) {
-    setState(() {});
+    list.forEach((item) {
+      print(item.text);
+    });
   }
 }

@@ -13,7 +13,7 @@ class BurgerMenu extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         children: [
-          Text(
+          const Text(
             "Google Keep",
             style: TextStyle(
                 fontSize: 24, color: textColor, fontWeight: FontWeight.bold),
@@ -21,7 +21,7 @@ class BurgerMenu extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(
               Icons.chat_bubble,
               color: textColor,
@@ -32,7 +32,7 @@ class BurgerMenu extends StatelessWidget {
                   fontSize: 20, color: textColor, fontWeight: FontWeight.w400),
             ),
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(
               Icons.notifications,
               color: textColor,
@@ -43,7 +43,7 @@ class BurgerMenu extends StatelessWidget {
                   fontSize: 20, color: textColor, fontWeight: FontWeight.w400),
             ),
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(
               Icons.add,
               color: textColor,
@@ -54,7 +54,7 @@ class BurgerMenu extends StatelessWidget {
                   fontSize: 20, color: textColor, fontWeight: FontWeight.w400),
             ),
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(
               Icons.archive,
               color: textColor,
@@ -72,11 +72,11 @@ class BurgerMenu extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const CreateKeep()),
               );
             },
-            leading: Icon(
+            leading: const Icon(
               Icons.add_box_outlined,
               color: textColor,
             ),
-            title: Text(
+            title: const Text(
               "Add new keep",
               style: TextStyle(
                   fontSize: 20, color: textColor, fontWeight: FontWeight.w400),

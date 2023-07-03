@@ -1,6 +1,6 @@
+import 'dart:html';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:keep_clone_app/pages/createKeep.dart';
+import 'package:keep_clone_app/pages/updateKeep.dart';
 
 import '../constants/colors.dart';
 
@@ -10,7 +10,7 @@ class KeepItem extends StatelessWidget {
   final String keepText;
   final onDeleteItem;
 
-  const KeepItem(
+  KeepItem(
       {super.key,
       required this.id,
       required this.keepTitle,
@@ -23,7 +23,10 @@ class KeepItem extends StatelessWidget {
       onTap: () => {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const CreateKeep()),
+          MaterialPageRoute(
+            builder: (context) =>
+                UpdateKeep(id: id, title: keepTitle, text: keepText),
+          ),
         )
       },
       child: Container(
@@ -34,26 +37,25 @@ class KeepItem extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
-        padding: EdgeInsets.all(10),
-        // color: Colors.blue,
+        padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               keepTitle,
-              style: TextStyle(
+              style: const TextStyle(
                 color: textColor,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Expanded(
               child: Text(
                 keepText,
-                style: TextStyle(
+                style: const TextStyle(
                   color: textColor,
                   fontSize: 18,
                 ),
@@ -62,16 +64,20 @@ class KeepItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Icon(Icons.delete_forever_outlined, color: Color(0xff525355)),
+                const Icon(Icons.delete_forever_outlined,
+                    color: Color(0xff525355)),
                 const SizedBox(width: 10),
-                Icon(Icons.edit, color: Color(0xff525355)),
+                const Icon(Icons.edit, color: Color(0xff525355)),
                 const SizedBox(width: 10),
                 GestureDetector(
-                    onTap: () {
-                      onDeleteItem(id);
-                    },
-                    child: Icon(Icons.delete_forever_outlined,
-                        color: Color(0xff525355))),
+                  onTap: () {
+                    onDeleteItem(id);
+                  },
+                  child: const Icon(
+                    Icons.delete_forever_outlined,
+                    color: Color(0xff525355),
+                  ),
+                ),
               ],
             )
           ],
